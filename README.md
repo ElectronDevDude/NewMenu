@@ -14,3 +14,4 @@ Normally editing this would require a user to go into the windows registry and c
 NME automates that process with an easy to understand UI, and is completely open-source.
 Note: This software works on most files but not all.
 ## Found a bug? Create an issue [here](https://github.com/ElectronDevDude/NewMenu/issues)
+This is the first winforms application i have wrote as well as the first c# code i have wrote outside of generally learning the syntax of c#, so this code may not be the most efficient but it works. If you feel that there is some way of doing something better, feel free to make a contribution!
