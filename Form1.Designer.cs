@@ -198,9 +198,8 @@ namespace NewContext_Windows_Forms
             this.FileFormatInput.Name = "FileFormatInput";
             this.FileFormatInput.Size = new System.Drawing.Size(136, 23);
             this.FileFormatInput.TabIndex = 9;
-            this.FileFormatInput.Text = "e.g. PDF";
+            this.FileFormatInput.Text = "e.g. \".PDF\"";
             this.FileFormatInput.Visible = false;
-            this.FileFormatInput.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // SelectFormatText
             // 

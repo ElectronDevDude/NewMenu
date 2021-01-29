@@ -81,11 +81,6 @@ namespace NewContext_Windows_Forms
             HelpMenu.Show();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
@@ -141,23 +136,40 @@ namespace NewContext_Windows_Forms
 
         private void CompleteButton_Click(object sender, EventArgs e)
         {
-            if (!Globals.Newfileloaded)
-            {
-                MessageBox.Show("Please select a file to be your template!");
-                return;
-            }
-            if (!TemplateFile.CheckFileExists) {
-                MessageBox.Show("File invalid");
-                return;
-            }
             string newfilename = "Template" + TemplateFile.SafeFileName.Substring(TemplateFile.SafeFileName.IndexOf("."));
-            string shellnewdir = @"C:\Windows\ShellNew\"+ newfilename;
-            System.IO.File.Copy(TemplateFile.FileName,shellnewdir,true);
-            RegistryKey shellnewkey = Registry.ClassesRoot.CreateSubKey(TemplateFile.SafeFileName.Substring(TemplateFile.SafeFileName.IndexOf("."))+@"\ShellNew\",true);
-            shellnewkey.SetValue("FileName", shellnewdir);
-            shellnewkey.Close();
-            MessageBox.Show("Menu updated!");
-
+            string shellnewdir = @"C:\Windows\ShellNew\" + newfilename;
+            if (!radioButton1.Checked)
+            {
+                if (FileFormatInput.Text.Substring(0, 1) == "." && File.Exists(@"C:\Windows\ShellNew\Template" + FileFormatInput.Text))
+                {
+                    File.Delete(@"C:\Windows\ShellNew\Template" + FileFormatInput.Text);
+                    using (RegistryKey key = Registry.ClassesRoot.OpenSubKey(TemplateFile.SafeFileName.Substring(TemplateFile.SafeFileName.IndexOf(".")) + @"\", true))
+                    {
+                      key.DeleteSubKeyTree("ShellNew",false);
+                    }
+                    MessageBox.Show("Item removed!");
+                }
+                else {
+                    MessageBox.Show("Was unable to find " + @"C:\Windows\ShellNew\Template" + FileFormatInput.Text);
+                    return;
+                }
+            }
+            else { 
+                if (!Globals.Newfileloaded)
+                {
+                    MessageBox.Show("Please select a file to be your template!");
+                    return;
+                }
+                if (!TemplateFile.CheckFileExists) {
+                    MessageBox.Show("File invalid");
+                    return;
+                }
+                System.IO.File.Copy(TemplateFile.FileName,shellnewdir,true);
+                RegistryKey shellnewkey = Registry.ClassesRoot.CreateSubKey(TemplateFile.SafeFileName.Substring(TemplateFile.SafeFileName.IndexOf("."))+@"\ShellNew\",true);
+                shellnewkey.SetValue("FileName", shellnewdir);
+                shellnewkey.Close();
+                MessageBox.Show("Menu updated!");
+            }
         }
 
         private void ServerConnectionError_BalloonTipClosed(object sender, EventArgs e)
