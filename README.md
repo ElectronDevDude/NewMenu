@@ -12,5 +12,5 @@ Open-Source menu editor!
 This software allows you to modify the menu on windows which creates new files!
 Normally editing this would require a user to go into the windows registry and change some things inside of it.
 NME automates that process with an easy to understand UI, and is completely open-source.
-
+Note: This software works on most files but not all.
 ## Found a bug? Create an issue [here](https://github.com/ElectronDevDude/NewMenu/issues)
